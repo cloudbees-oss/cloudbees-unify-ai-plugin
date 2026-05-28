@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"var r=process.env.CLAUDE_PLUGIN_ROOT;if(r){var f=require('fs'),p=require('path');var t=f.readFileSync(p.join(r,'hooks','system-prompt.md'),'utf8');process.stdout.write(JSON.stringify({hookSpecificOutput:{hookEventName:'SessionStart',additionalContext:t}}))}\""
+          }
+        ]
+      }
+    ]
+  }
+}

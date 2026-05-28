@@ -1,0 +1,17 @@
+{
+  "name": "unify-ai-plugins",
+  "owner": {
+    "name": "CloudBees"
+  },
+  "metadata": {
+    "description": "CloudBees Unify plugins for AI coding agents (Claude Code, GitHub Copilot CLI)."
+  },
+  "plugins": [
+    {
+      "name": "cloudbees-unify",
+      "description": "CloudBees Unify plugin for AI coding agents. Talk to CloudBees Unify (components, workflows, builds, security findings, feature flags) from Claude Code and GitHub Copilot CLI via the Unify MCP server.",
+      "version": "0.1.0",
+      "source": "./"
+    }
+  ]
+}
