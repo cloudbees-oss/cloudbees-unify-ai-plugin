@@ -1,0 +1,43 @@
+{
+  "skill_name": "onboard-repo-to-unify",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Help me onboard this repo to Unify. It's a monorepo with three services: api, worker, and frontend.",
+      "expected_output": "Verifies connection, finds org and GitHub endpoint, detects the monorepo situation, explains the one-component-per-URL constraint, asks how many components to create, then creates the component(s) and summarizes.",
+      "files": [],
+      "assertions": [
+        "Calls user_whoami before proceeding",
+        "Calls organizations_list_suborganizations to find the org",
+        "Calls endpoint_list to find the GitHub App integration",
+        "Runs git remote get-url origin to get the repo URL",
+        "Asks the user whether to create one component or multiple before creating anything",
+        "Explains the one-component-per-URL constraint when multiple services are mentioned",
+        "Creates at least one component successfully",
+        "Summarizes what was created at the end"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I want to add my GitHub repo to CloudBees Unify but I haven't connected GitHub yet.",
+      "expected_output": "Verifies Unify connection, finds the org, detects no GitHub endpoint, gives clear instructions to add the GitHub App integration in Unify settings, then waits for the user to confirm before proceeding.",
+      "files": [],
+      "assertions": [
+        "Calls endpoint_list and detects no GitHub endpoint",
+        "Gives clear instructions to navigate to Unify settings to add the GitHub App",
+        "Does not attempt to create a component before the GitHub integration is confirmed"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Register this repo in Unify as a single component called my-service.",
+      "expected_output": "Verifies connection, gets org and endpoint, gets repo URL and branch from git, creates a component named 'my-service', and confirms success.",
+      "files": [],
+      "assertions": [
+        "Creates a component with the name 'my-service'",
+        "Uses the correct repository URL from git remote",
+        "Confirms the component was created with its ID"
+      ]
+    }
+  ]
+}
