@@ -7,6 +7,27 @@ This repository provides a prepackaged agent plugin that lets AI coding agents (
 
 ## Installation
 
+### Claude Code
+
+Install from the Claude Code marketplace (once published):
+
+```
+/plugin marketplace add cloudbees-oss/cloudbees-unify-ai-plugins
+/plugin install cloudbees-unify@unify-ai-plugins
+```
+
+Or install locally from a clone:
+
+```
+git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugins.git
+claude plugin install ./cloudbees-unify-ai-plugins --scope user
+```
+
+Once installed, open Claude and connect to Unify using the Unify MCP Server:
+1. Send the `/mcp` command to Claude.
+2. Select the `unify-mcp-server` server
+3. Choose the Authenticate option and follow the instructions in Claude
+
 ### VS Code (Agent Plugins)
 
 **Recommended:** Install as an Agent Plugin in VS Code 1.99+ (Copilot Chat agent mode):
@@ -16,7 +37,7 @@ This repository provides a prepackaged agent plugin that lets AI coding agents (
 3. To install from source, run **Chat: Install Plugin From Source** from the Command Palette and enter:
 
    ```
-   https://github.com/cloudbees/unify-ai-plugins.git
+   https://github.com/cloudbees-oss/cloudbees-unify-ai-plugins.git
    ```
 
 4. The plugin will appear in the **Agent Plugins - Installed** section. Enable it if needed.
@@ -25,7 +46,7 @@ This repository provides a prepackaged agent plugin that lets AI coding agents (
 
 1. Clone this repo:
    ```
-   git clone https://github.com/cloudbees/unify-ai-plugins.git
+   git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugins.git
    ```
 2. Register the plugin in your VS Code `settings.json`:
    ```json
@@ -34,22 +55,6 @@ This repository provides a prepackaged agent plugin that lets AI coding agents (
    }
    ```
 3. Reload VS Code. The plugin will be enabled and its skills, agents, hooks, and MCP servers will be auto-discovered.
-
-### Claude Code
-
-Install from the Claude Code marketplace (once published):
-
-```
-/plugin marketplace add cloudbees/unify-ai-plugins
-/plugin install cloudbees-unify@unify-ai-plugins
-```
-
-Or install locally from a clone:
-
-```
-git clone https://github.com/cloudbees/unify-ai-plugins.git
-claude plugin install ./unify-ai-plugins --scope user
-```
 
 ### GitHub Copilot CLI
 
