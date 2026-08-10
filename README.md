@@ -12,14 +12,14 @@ This repository provides a prepackaged agent plugin that lets AI coding agents (
 Install from the Claude Code marketplace (once published):
 
 ```
-/plugin marketplace add cloudbees-oss/cloudbees-unify-ai-plugins
+/plugin marketplace add cloudbees-oss/cloudbees-unify-ai-plugin
 /plugin install cloudbees-unify@unify-ai-plugins
 ```
 
 Or install locally from a clone:
 
 ```
-git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugins.git
+git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin.git
 claude plugin install ./cloudbees-unify-ai-plugins --scope user
 ```
 
@@ -37,7 +37,7 @@ Once installed, open Claude and connect to Unify using the Unify MCP Server:
 3. To install from source, run **Chat: Install Plugin From Source** from the Command Palette and enter:
 
    ```
-   https://github.com/cloudbees-oss/cloudbees-unify-ai-plugins.git
+   https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin.git
    ```
 
 4. The plugin will appear in the **Agent Plugins - Installed** section. Enable it if needed.
@@ -46,12 +46,12 @@ Once installed, open Claude and connect to Unify using the Unify MCP Server:
 
 1. Clone this repo:
    ```
-   git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugins.git
+   git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin.git
    ```
 2. Register the plugin in your VS Code `settings.json`:
    ```json
    "chat.pluginLocations": {
-     "/absolute/path/to/unify-ai-plugins": true
+     "/absolute/path/to/unify-ai-plugin": true
    }
    ```
 3. Reload VS Code. The plugin will be enabled and its skills, agents, hooks, and MCP servers will be auto-discovered.
