@@ -3,6 +3,9 @@
     "unify-mcp-server": {
       "type": "http",
       "url": "https://mcp.cloudbees.io/v1/mcp",
+      "headers": {
+        "X-MCP-Toolsets": "all"
+      },
       "oauth": {
         "clientId": "public-mcp-client"
       }

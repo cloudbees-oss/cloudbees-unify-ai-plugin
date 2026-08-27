@@ -6,6 +6,9 @@ description: >
   repo to Unify", "add this project to CloudBees Unify", "register this repo in
   Unify", "create a Unify component for this repo", "set up this repo in CloudBees",
   or "connect my repo and run a security scan".
+allowed-tools:
+  - mcp__unify-mcp-server__*
+  - Bash
 ---
 
 # Onboard Repo to CloudBees Unify
