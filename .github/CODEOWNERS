@@ -1,0 +1,2 @@
+# Code owners are automatically requested for review on PRs that touch their files.
+* @cloudbees/team-ai-mcp @jmatthiesen
