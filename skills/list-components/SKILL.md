@@ -5,7 +5,6 @@ allowed-tools:
   - mcp__unify-mcp-server__*
   - Read
   - Grep
-agent: unify-assistant
 ---
 
 # List Components
