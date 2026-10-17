@@ -1,9 +1,12 @@
 .DS_Store
 node_modules/
 *.log
+*.pyc
+__pycache__/
 .env
 .env.local
 .vscode/
 .idea/
 dist/
 build/
+.worktrees/

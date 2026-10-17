@@ -1,0 +1,12 @@
+interface:
+  display_name: List Unify Components
+  short_description: List components in a CloudBees Unify organization.
+  default_prompt: List the CloudBees Unify components available to me.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: unify-mcp-server
+      description: Access CloudBees Unify.
+      transport: streamable_http
+      url: https://mcp.cloudbees.io/v1/mcp
