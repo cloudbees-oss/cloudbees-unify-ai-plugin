@@ -15,7 +15,7 @@
       "category": "Developer Tools",
       "policy": {
         "installation": "AVAILABLE",
-        "authentication": "FIRST_USE"
+        "authentication": "ON_USE"
       }
     }
   ]
