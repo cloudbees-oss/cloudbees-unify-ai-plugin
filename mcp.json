@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "unify-mcp-server": {
+      "type": "streamable-http",
+      "url": "https://mcp.cloudbees.io/v1/mcp",
+      "headers": {
+        "X-MCP-Toolsets": "all"
+      },
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "public-mcp-client",
+              "tokenEndpointAuthMethod": "none"
+            }
+          }
+        }
+      }
+    }
+  }
+}

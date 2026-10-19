@@ -1,11 +1,9 @@
 ---
 name: onboard-repo-to-unify
 description: >
-  Onboard a GitHub repository to CloudBees Unify by creating one or more components
-  and triggering a security scan. Use when the user says things like "onboard this
-  repo to Unify", "add this project to CloudBees Unify", "register this repo in
-  Unify", "create a Unify component for this repo", "set up this repo in CloudBees",
-  or "connect my repo and run a security scan".
+  Use when the user asks to onboard, add, register, or connect a source repository
+  to CloudBees Unify, create a Unify component for it, or trigger its initial
+  security scan.
 allowed-tools:
   - mcp__unify-mcp-server__*
   - Bash
@@ -23,8 +21,10 @@ If either is missing, stop and advise them to get the necessary permissions firs
 
 ## Workflow
 
-1. **Verify Unify connection** — call `user_whoami`. If it errors, tell the user to
-   check `/mcp` and run `/reload-plugins`.
+1. **Verify Unify connection** — call `user_whoami`. If the call fails because the
+   MCP server is disconnected or unauthenticated, tell the user to reconnect the
+   Unify integration in their current host and complete the browser OAuth flow,
+   then retry.
 
 2. **Get org ID** — call `organizations_list_suborganizations`. Auto-select if only
    one exists; otherwise ask the user to pick.
@@ -36,9 +36,11 @@ If either is missing, stop and advise them to get the necessary permissions firs
      → "Create integration", select their SCM provider, fill in the form, and save.
      Ask them to confirm when done, then retry.
 
-4. **Get repo details** — run `git remote get-url origin` for the URL and
-   `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
-   branch (fall back to `main`).
+4. **Get repo details**:
+   - If local repository tools are available, run `git remote get-url origin` for
+     the URL and `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for
+     the default branch (fall back to `main`).
+   - Otherwise, ask the user for the repository URL and default branch.
 
 5. **Check for existing components** — call `components_list`. If this repo URL is
    already registered, show the existing component and confirm before proceeding.

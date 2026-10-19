@@ -1,0 +1,22 @@
+{
+  "name": "unify-ai-plugins",
+  "owner": {
+    "name": "CloudBees"
+  },
+  "metadata": {
+    "description": "CloudBees Unify plugins for ChatGPT, Codex, and AI coding agents."
+  },
+  "plugins": [
+    {
+      "name": "cloudbees-unify",
+      "description": "Access CloudBees Unify components, workflows, builds, security findings, and feature flags.",
+      "version": "0.1.0",
+      "source": "./",
+      "category": "Developer Tools",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "cloudbees-unify",
+  "version": "0.1.0",
+  "description": "CloudBees Unify plugin for ChatGPT and AI coding agents. Talk to CloudBees Unify from ChatGPT, Cursor, Claude Code, VS Code, and GitHub Copilot CLI via the Unify MCP server.",
+  "author": {
+    "name": "CloudBees",
+    "url": "https://www.cloudbees.com"
+  },
+  "homepage": "https://www.cloudbees.com/unify",
+  "repository": "https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "cloudbees",
+    "unify",
+    "devops",
+    "ci-cd",
+    "security"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "CloudBees Unify",
+        "shortDescription": "Access CloudBees Unify",
+        "longDescription": "Explore CloudBees Unify components, workflows, builds, security findings, feature flags, CI controllers, users, and teams through the hosted Unify MCP server.",
+        "developerName": "CloudBees",
+        "category": "Developer Tools",
+        "capabilities": [
+          "List components",
+          "Inspect workflows",
+          "Review build status",
+          "Find security issues",
+          "Manage feature flags"
+        ],
+        "websiteURL": "https://www.cloudbees.com/unify",
+        "supportURL": "https://support.cloudbees.com/",
+        "privacyPolicyURL": "https://www.cloudbees.com/legal/privacy-policy",
+        "termsOfServiceURL": "https://www.cloudbees.com/company/terms-of-service",
+        "defaultPrompt": [
+          "List my CloudBees Unify components",
+          "Show recent workflow runs in Unify",
+          "Find critical security issues in Unify"
+        ]
+      }
+    }
+  }
+}

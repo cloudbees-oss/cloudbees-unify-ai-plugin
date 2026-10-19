@@ -1,6 +1,6 @@
 ---
 name: list-components
-description: List CloudBees Unify components in an organization. Use when the user asks "what components do I have", "list services", or needs to look up a component name/ID before another operation.
+description: Use when the user asks what CloudBees Unify components or services they have, or needs a component name or ID for another operation.
 allowed-tools:
   - mcp__unify-mcp-server__*
   - Read
@@ -26,4 +26,7 @@ List components in a CloudBees Unify organization via the Unify MCP server.
 ## Notes
 
 - First call may trigger OAuth in the browser. Tell the user this is expected.
+- If the MCP server is disconnected or unauthenticated, tell the user to reconnect
+  the Unify integration in their current host and complete the browser OAuth flow,
+  then retry.
 - Component IDs are the right input for downstream skills (build status, workflow runs). Prefer IDs over names when chaining.

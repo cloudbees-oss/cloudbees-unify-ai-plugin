@@ -1,0 +1,12 @@
+interface:
+  display_name: Onboard Repository to Unify
+  short_description: Register a repository and start its first security scan.
+  default_prompt: Onboard a source repository to CloudBees Unify.
+
+dependencies:
+  tools:
+    - type: mcp
+      value: unify-mcp-server
+      description: Access CloudBees Unify.
+      transport: streamable_http
+      url: https://mcp.cloudbees.io/v1/mcp
