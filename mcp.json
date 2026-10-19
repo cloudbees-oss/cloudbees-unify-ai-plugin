@@ -4,6 +4,9 @@
     "unify-mcp-server": {
       "type": "streamable-http",
       "url": "https://mcp.cloudbees.io/v1/mcp",
+      "headers": {
+        "X-MCP-Toolsets": "all"
+      },
       "extensions": {
         "com.openai": {
           "auth": {
