@@ -1,0 +1,19 @@
+{
+  "name": "unify-ai-plugins",
+  "interface": {
+    "displayName": "CloudBees Unify"
+  },
+  "plugins": [
+    {
+      "name": "cloudbees-unify",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

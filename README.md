@@ -1,7 +1,16 @@
 
-# CloudBees Unify Agent Plugin for VS Code, Claude Code, and Copilot CLI
+# CloudBees Unify Agent Plugin for Claude Code, Codex, VS Code, and Copilot CLI
 
-This repository provides a prepackaged agent plugin that lets AI coding agents (VS Code Copilot Chat, Claude Code, and Copilot CLI) talk to CloudBees Unify — including components, workflow runs, build status and logs, security findings, feature flags, CI controllers, users, and teams — via the Unify MCP server.
+**Ship AI-written code faster and safer with CloudBees, right from your coding agent.**
+
+AI agents write code faster than teams can test, release, and govern it. This plugin brings CloudBees Unify into the coding agent you already use, so the agent that writes your code can also help you test, ship, and govern it:
+
+- **Build at AI speed:** find out why a build failed, read its logs, and see which test suites and cases broke.
+- **Jenkins visibility (CloudBees CI):** list your controllers and surface disabled or out-of-date plugins and open vulnerabilities.
+- **Faster, safer releases:** trigger, rerun, or stop workflows, approve manual gates, and toggle or progressively roll out feature flags by target group.
+- **Govern the software factory:** review policy gate outcomes for each run, manage policies and approvals, and triage security findings against SLAs, all in one place.
+
+The plugin connects to the Unify MCP server and adds skills for common tasks like onboarding a repository.
 
 ## Installation
 
@@ -18,13 +27,44 @@ Or install locally from a clone:
 
 ```
 git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin.git
-claude plugin install ./cloudbees-unify-ai-plugin --scope user
+claude plugin marketplace add ./cloudbees-unify-ai-plugin
+claude plugin install cloudbees-unify@unify-ai-plugins
 ```
 
 Once installed, open Claude and connect to Unify using the Unify MCP Server:
 1. Send the `/mcp` command to Claude.
 2. Select the `unify-mcp-server` server
 3. Choose the Authenticate option and follow the instructions in Claude
+
+### Claude desktop app
+
+The desktop app uses the same marketplace. Add `cloudbees-oss/cloudbees-unify-ai-plugin`
+as a plugin marketplace in the app, then install `cloudbees-unify`.
+
+### Codex CLI
+
+```
+codex plugin marketplace add cloudbees-oss/cloudbees-unify-ai-plugin
+codex plugin add cloudbees-unify@unify-ai-plugins
+```
+
+From a clone, pass the local path to `codex plugin marketplace add` instead.
+Run `codex plugin list` to confirm the plugin is installed and enabled.
+
+Then sign in to the Unify MCP server:
+
+```
+codex mcp login unify-mcp-server
+```
+
+An MCP server named `unify-mcp-server` in your own Codex configuration takes
+precedence over the plugin's server. Remove it with
+`codex mcp remove unify-mcp-server` to use the plugin's connection.
+
+### Codex in the ChatGPT desktop app
+
+The Codex app shares its plugin configuration with Codex CLI. Install the plugin
+with the commands above, or add the same marketplace from the app's plugin settings.
 
 ### VS Code (Agent Plugins)
 
@@ -60,7 +100,7 @@ Uses the same plugin format as above. See [GitHub Copilot CLI plugin reference](
 
 ## How it works
 
-This plugin ships a `.claude-plugin/plugin.json` (Claude/VS Code compatible) and a `.mcp.json` that points at the CloudBees Unify MCP server (`https://mcp.cloudbees.io/v1/mcp`).
+This plugin ships a `.claude-plugin/plugin.json` (Claude/VS Code compatible) and a `.mcp.json` that points at the CloudBees Unify MCP server (`https://mcp.cloudbees.io/v1/mcp`). Codex reads `.codex-plugin/plugin.json` and `.codex-plugin/mcp.json`, which points at the same server.
 
 When enabled, VS Code, Claude Code, and Copilot CLI auto-discover:
 
@@ -109,7 +149,9 @@ A Snyk finding flagged lodash in the auth-service. Pull the finding from Unify,
 
 ## Layout
 
-- `.claude-plugin/`   — plugin.json + marketplace.json
+- `.claude-plugin/`   — Claude plugin.json + marketplace.json
+- `.codex-plugin/`    — Codex plugin.json + mcp.json
+- `.agents/plugins/`  — Codex marketplace.json
 - `.mcp.json`         — Unify MCP server config (auto-wired on install)
 - `skills/`           — skill definitions
 - `hooks/`            — SessionStart hook + system prompt injected on session start
