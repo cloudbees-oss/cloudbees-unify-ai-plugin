@@ -25,6 +25,7 @@
   ],
   "repository": "https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin",
   "license": "MIT",
+  "skills": "./skills/",
   "mcpServers": "./.codex-plugin/mcp.json",
   "interface": {
     "displayName": "CloudBees Unify",
