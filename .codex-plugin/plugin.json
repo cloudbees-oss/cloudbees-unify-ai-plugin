@@ -12,6 +12,8 @@
     "displayName": "CloudBees Unify",
     "shortDescription": "CloudBees Unify workflows for AI coding agents.",
     "developerName": "CloudBees",
-    "category": "Developer Tools"
+    "category": "Developer Tools",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
   }
 }
