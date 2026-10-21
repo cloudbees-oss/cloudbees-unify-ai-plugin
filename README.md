@@ -42,6 +42,16 @@ codex plugin add cloudbees-unify@unify-ai-plugins
 From a clone, pass the local path to `codex plugin marketplace add` instead.
 Run `codex plugin list` to confirm the plugin is installed and enabled.
 
+Then sign in to the Unify MCP server:
+
+```
+codex mcp login unify-mcp-server
+```
+
+An MCP server named `unify-mcp-server` in your own Codex configuration takes
+precedence over the plugin's server. Remove it with
+`codex mcp remove unify-mcp-server` to use the plugin's connection.
+
 ### Codex in the ChatGPT desktop app
 
 The Codex app shares its plugin configuration with Codex CLI. Install the plugin
@@ -81,7 +91,7 @@ Uses the same plugin format as above. See [GitHub Copilot CLI plugin reference](
 
 ## How it works
 
-This plugin ships a `.claude-plugin/plugin.json` (Claude/VS Code compatible) and a `.mcp.json` that points at the CloudBees Unify MCP server (`https://mcp.cloudbees.io/v1/mcp`).
+This plugin ships a `.claude-plugin/plugin.json` (Claude/VS Code compatible) and a `.mcp.json` that points at the CloudBees Unify MCP server (`https://mcp.cloudbees.io/v1/mcp`). Codex reads `.codex-plugin/plugin.json` and `.codex-plugin/mcp.json`, which points at the same server.
 
 When enabled, VS Code, Claude Code, and Copilot CLI auto-discover:
 
@@ -131,7 +141,7 @@ A Snyk finding flagged lodash in the auth-service. Pull the finding from Unify,
 ## Layout
 
 - `.claude-plugin/`   — Claude plugin.json + marketplace.json
-- `.codex-plugin/`    — Codex plugin.json
+- `.codex-plugin/`    — Codex plugin.json + mcp.json
 - `.agents/plugins/`  — Codex marketplace.json
 - `.mcp.json`         — Unify MCP server config (auto-wired on install)
 - `skills/`           — skill definitions
