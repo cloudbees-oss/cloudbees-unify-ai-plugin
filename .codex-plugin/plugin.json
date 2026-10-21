@@ -1,0 +1,16 @@
+{
+  "name": "cloudbees-unify",
+  "version": "0.1.0",
+  "description": "CloudBees Unify workflows for AI coding agents.",
+  "author": {
+    "name": "CloudBees"
+  },
+  "repository": "https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin",
+  "license": "MIT",
+  "interface": {
+    "displayName": "CloudBees Unify",
+    "shortDescription": "CloudBees Unify workflows for AI coding agents.",
+    "developerName": "CloudBees",
+    "category": "Developer Tools"
+  }
+}
