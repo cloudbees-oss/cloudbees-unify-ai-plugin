@@ -1,7 +1,16 @@
 
 # CloudBees Unify Agent Plugin for Claude Code, Codex, VS Code, and Copilot CLI
 
-This repository provides a prepackaged agent plugin that lets AI coding agents (VS Code Copilot Chat, Claude Code, and Copilot CLI) talk to CloudBees Unify — including components, workflow runs, build status and logs, security findings, feature flags, CI controllers, users, and teams — via the Unify MCP server.
+**Ship AI-written code faster and safer with CloudBees, right from your coding agent.**
+
+AI agents write code faster than teams can test, release, and govern it. This plugin brings CloudBees Unify into the coding agent you already use, so the agent that writes your code can also help you test, ship, and govern it:
+
+- **Build at AI speed:** find out why a build failed, read its logs, and see which test suites and cases broke.
+- **Jenkins visibility (CloudBees CI):** list your controllers and surface disabled or out-of-date plugins and open vulnerabilities.
+- **Faster, safer releases:** trigger, rerun, or stop workflows, approve manual gates, and toggle or progressively roll out feature flags by target group.
+- **Govern the software factory:** review policy gate outcomes for each run, manage policies and approvals, and triage security findings against SLAs, all in one place.
+
+The plugin connects to the Unify MCP server and adds skills for common tasks like onboarding a repository.
 
 ## Installation
 
