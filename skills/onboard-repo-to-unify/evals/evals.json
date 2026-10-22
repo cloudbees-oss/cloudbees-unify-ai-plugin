@@ -8,13 +8,14 @@
       "files": [],
       "assertions": [
         "Calls user_whoami before proceeding",
-        "Calls organizations_list_suborganizations to find the org",
+        "Calls organizations_list to find the org",
         "Calls endpoint_list to find the GitHub App integration",
         "Runs git remote get-url origin to get the repo URL",
         "Asks the user whether to create one component or multiple before creating anything",
         "Explains the one-component-per-URL constraint when multiple services are mentioned",
         "Creates at least one component successfully",
-        "Summarizes what was created at the end"
+        "Summarizes what was created at the end",
+        "Does not claim a security scan started, finished, or passed; points to the Runs and Security Center tabs instead"
       ]
     },
     {

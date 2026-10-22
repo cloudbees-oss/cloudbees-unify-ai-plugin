@@ -108,6 +108,8 @@ When enabled, VS Code, Claude Code, and Copilot CLI auto-discover:
 - **Hooks** (in `hooks/` or `hooks.json`)
 - **MCP servers** (from `.mcp.json`)
 
+Codex loads the same skills and the MCP server from `.codex-plugin/plugin.json`. It doesn't load the hooks.
+
 On first use, the MCP server opens a browser window for OAuth (Google, GitHub, or SSO). After that, agent tools invoke Unify transparently.
 
 ## Usage

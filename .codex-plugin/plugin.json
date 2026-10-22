@@ -1,6 +1,6 @@
 {
   "name": "cloudbees-unify",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ship AI-written code faster and safer with CloudBees, right from your coding agent.",
   "author": {
     "name": "CloudBees"
@@ -25,6 +25,7 @@
   ],
   "repository": "https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin",
   "license": "MIT",
+  "skills": "./skills/",
   "mcpServers": "./.codex-plugin/mcp.json",
   "interface": {
     "displayName": "CloudBees Unify",
