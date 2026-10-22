@@ -53,9 +53,6 @@ allowed-tools:
      `childOrganizations` at every depth. If it's still not found, say so and ask the
      user for the org ID. Don't guess.
 
-   If the selected org sits under a different top-level org than the one searched in
-   step 3, repeat step 3 for that top-level org.
-
 5. **Find SCM endpoint** — call `endpoint_list` with `resourceId` set to the org ID,
    `contributionTypes: "cb.platform.endpoint-type"`, and `parents: true` (a
    sub-organization usually inherits its parent's integrations). Follow `nextCursor`
