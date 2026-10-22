@@ -10,7 +10,7 @@
     {
       "name": "cloudbees-unify",
       "description": "Ship AI-written code faster and safer with CloudBees, right from your coding agent. Debug failed builds and test results, rerun and approve workflows, toggle and roll out feature flags, spot outdated plugins and vulnerabilities on your Jenkins controllers, and check policy gates and security findings without switching tools.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "keywords": [
         "cloudbees",
         "unify",
