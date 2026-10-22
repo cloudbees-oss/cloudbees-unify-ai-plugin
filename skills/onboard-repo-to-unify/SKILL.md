@@ -19,7 +19,21 @@ allowed-tools:
 1. **Verify Unify connection** — call `user_whoami`. If it errors, tell the user to
    check `/mcp` and run `/reload-plugins`.
 
-2. **Get org ID** — ask which organization or sub-organization the component belongs
+2. **Get repo details** — run `git remote get-url origin` for the URL and
+   `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
+   branch (fall back to `main`).
+
+3. **Check for existing components** — before asking about an org, resolve
+   `selected_organization` from `user_whoami` as in step 4 and take the top-level
+   organization it sits under (itself, if it has no parent). If there's no
+   `selected_organization`, ask which top-level org to search. Call `services_list`
+   with that org ID and `typeFilter: COMPONENT_FILTER`; its results include
+   sub-organization components. Compare each `repositoryUrl` to the repo URL (ignore
+   a trailing `.git`; treat `git@host:owner/repo` and `https://host/owner/repo` as
+   the same), and say which org you searched. If this repo URL is already registered,
+   show the existing component and ask how to proceed instead of asking for an org.
+
+4. **Get org ID** — ask which organization or sub-organization the component belongs
    in, suggesting `selected_organization` from `user_whoami`. Resolve the name with
    `organizations_list` and `name` (a plain, case-insensitive fragment; no wildcards):
    - One match: use its `id`.
@@ -30,10 +44,10 @@ allowed-tools:
      `childOrganizations` at every depth. If it's still not found, say so and ask the
      user for the org ID. Don't guess.
 
-   Note the top-level organization the selected org sits under (itself, if it has no
-   parent); step 5 needs it.
+   If the selected org sits under a different top-level org than the one searched in
+   step 3, repeat step 3 for that top-level org.
 
-3. **Find SCM endpoint** — call `endpoint_list` with `resourceId` set to the org ID,
+5. **Find SCM endpoint** — call `endpoint_list` with `resourceId` set to the org ID,
    `contributionTypes: "cb.platform.endpoint-type"`, and `parents: true` (a
    sub-organization usually inherits its parent's integrations). Follow `nextCursor`
    until it's absent. This type also returns non-SCM integrations such as container
@@ -46,19 +60,8 @@ allowed-tools:
      to go to Unify → org Settings → Integrations → "Create integration", select their
      SCM provider, fill in the form, and save. Ask them to confirm when done, then retry.
 
-4. **Get repo details** — run `git remote get-url origin` for the URL and
-   `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
-   branch (fall back to `main`).
-
-5. **Check for existing components** — call `services_list` with `organizationId` and
-   `typeFilter: COMPONENT_FILTER`, and compare each `repositoryUrl` to the repo URL
-   (ignore a trailing `.git`; treat `git@host:owner/repo` and `https://host/owner/repo`
-   as the same). Use the top-level org ID: its results include sub-organization
-   components. If this repo URL is already registered, show the existing component and
-   confirm before proceeding.
-
 6. **Create component(s)** — call `services_add` with `organizationId` (the org
-   selected in step 2, not the top-level one from step 5), `name`,
+   selected in step 4, not the top-level one from step 3), `name`,
    `serviceType: "COMPONENT"`, `endpointId`, `repositoryUrl` (the HTTPS clone URL),
    and `defaultBranch`. The component name defaults to the last segment of the repo
    name. Do not offer to create duplicate components for the same repo URL; if the

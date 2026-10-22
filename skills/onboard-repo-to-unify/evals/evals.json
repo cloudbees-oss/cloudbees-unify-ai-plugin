@@ -41,6 +41,19 @@
         "Uses the correct repository URL from git remote",
         "Confirms the component was created with its ID"
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Onboard this repo to Unify.",
+      "expected_output": "The repo's remote URL is already registered as a component in a sub-organization. Reads the git remote, searches the top-level org's components, finds the match, shows the existing component, and asks how to proceed without asking which org to use.",
+      "files": [],
+      "assertions": [
+        "Runs git remote get-url origin before asking which org to use",
+        "Calls services_list with the top-level org ID and COMPONENT_FILTER before asking which org to use",
+        "Shows the existing component whose repositoryUrl matches the remote, and says which org was searched",
+        "Does not ask which org the component belongs in",
+        "Does not call services_add"
+      ]
     }
   ]
 }
