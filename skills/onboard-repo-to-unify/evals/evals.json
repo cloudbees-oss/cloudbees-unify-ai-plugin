@@ -78,6 +78,18 @@
         "Warns that the remote has no commits and nothing will appear in Runs until code is pushed",
         "Does not stop the onboarding because the remote is empty"
       ]
+    },
+    {
+      "id": 7,
+      "prompt": "Onboard this repo to Unify.",
+      "expected_output": "git ls-remote fails because the remote doesn't exist or local git can't see it. Says the remote can't be reached with local git, notes that Unify's integration may still have access, and asks whether to continue instead of treating the remote as empty.",
+      "files": [],
+      "assertions": [
+        "Runs git ls-remote --heads origin and detects that it failed",
+        "Says the remote may not exist or the user's git credentials can't see it",
+        "Does not give the empty-remote warning",
+        "Asks whether to continue before calling services_add"
+      ]
     }
   ]
 }
