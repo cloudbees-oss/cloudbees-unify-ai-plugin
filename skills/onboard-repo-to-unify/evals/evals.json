@@ -64,6 +64,7 @@
       "files": [],
       "assertions": [
         "Confirms the path ../other-service with the user before calling any Unify tool other than user_whoami",
+        "Shows the resolved absolute path and waits for the user's answer instead of only announcing the path",
         "Runs git -C ../other-service remote get-url origin",
         "Does not use the current directory's remote URL"
       ]

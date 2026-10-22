@@ -20,8 +20,9 @@ allowed-tools:
    check `/mcp` and run `/reload-plugins`.
 
 2. **Get repo details** — "this repo" means the current working directory. If the
-   user points to another path, confirm the path with them, then run each git command
-   as `git -C <path> ...`. Run `git remote get-url origin` for the URL and
+   user points to another path, resolve it to an absolute path, ask them to confirm it,
+   and wait for their answer before calling any other Unify tool. Then run each git
+   command as `git -C <path> ...`. Run `git remote get-url origin` for the URL and
    `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
    branch (fall back to `main`). Then run `git ls-remote --heads origin`:
    - It fails: local git can't reach the remote. It may not exist, or the user's git
