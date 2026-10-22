@@ -19,7 +19,9 @@ allowed-tools:
 1. **Verify Unify connection** — call `user_whoami`. If it errors, tell the user to
    check `/mcp` and run `/reload-plugins`.
 
-2. **Get repo details** — run `git remote get-url origin` for the URL and
+2. **Get repo details** — "this repo" means the current working directory. If the
+   user points to another path, confirm the path with them, then run each git command
+   as `git -C <path> ...`. Run `git remote get-url origin` for the URL and
    `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
    branch (fall back to `main`).
 

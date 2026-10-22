@@ -39,7 +39,8 @@
       "assertions": [
         "Creates a component with the name 'my-service'",
         "Uses the correct repository URL from git remote",
-        "Confirms the component was created with its ID"
+        "Confirms the component was created with its ID",
+        "Reads the remote from the current working directory without asking for a path"
       ]
     },
     {
@@ -53,6 +54,17 @@
         "Shows the existing component whose repositoryUrl matches the remote, and says which org was searched",
         "Does not ask which org the component belongs in",
         "Does not call services_add"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Onboard the repo at ../other-service to Unify.",
+      "expected_output": "Confirms the path ../other-service with the user, then reads that repo's remote and default branch with git -C instead of using the current directory.",
+      "files": [],
+      "assertions": [
+        "Confirms the path ../other-service with the user before calling any Unify tool other than user_whoami",
+        "Runs git -C ../other-service remote get-url origin",
+        "Does not use the current directory's remote URL"
       ]
     }
   ]
