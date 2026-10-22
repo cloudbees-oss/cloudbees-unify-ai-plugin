@@ -10,6 +10,7 @@
         "Calls user_whoami before proceeding",
         "Calls organizations_list to find the org",
         "Calls endpoint_list to find the GitHub App integration",
+        "Does not ask about SCM admin access or token creation, because a matching endpoint exists",
         "Runs git remote get-url origin to get the repo URL",
         "Asks the user whether to create one component or multiple before creating anything",
         "Explains the one-component-per-URL constraint when multiple services are mentioned",
@@ -25,6 +26,7 @@
       "files": [],
       "assertions": [
         "Calls endpoint_list and detects no GitHub endpoint",
+        "Asks about SCM admin access and token creation only after endpoint_list finds no matching integration",
         "Gives clear instructions to navigate to Unify settings to add the GitHub App",
         "Does not attempt to create a component before the GitHub integration is confirmed"
       ]
@@ -32,12 +34,62 @@
     {
       "id": 3,
       "prompt": "Register this repo in Unify as a single component called my-service.",
-      "expected_output": "Verifies connection, gets org and endpoint, gets repo URL and branch from git, creates a component named 'my-service', and confirms success.",
+      "expected_output": "Verifies connection, gets org and endpoint, gets repo URL and branch from git, creates a component named 'my-service', reads it back, and only then confirms success.",
       "files": [],
       "assertions": [
         "Creates a component with the name 'my-service'",
         "Uses the correct repository URL from git remote",
-        "Confirms the component was created with its ID"
+        "After services_add, calls services_list with the returned id and the same organizationId passed to services_add",
+        "Reports success, with the component ID, only after that read returns the component",
+        "Reads the remote from the current working directory without asking for a path"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Onboard this repo to Unify.",
+      "expected_output": "The repo's remote URL is already registered as a component in a sub-organization. Reads the git remote, searches the top-level org's components, finds the match, shows the existing component, and asks how to proceed without asking which org to use.",
+      "files": [],
+      "assertions": [
+        "Runs git remote get-url origin before asking which org to use",
+        "Calls services_list with the top-level org ID and COMPONENT_FILTER before asking which org to use",
+        "Shows the existing component whose repositoryUrl matches the remote, and says which org was searched",
+        "Does not ask which org the component belongs in",
+        "Does not call services_add"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Onboard the repo at ../other-service to Unify.",
+      "expected_output": "Confirms the path ../other-service with the user, then reads that repo's remote and default branch with git -C instead of using the current directory.",
+      "files": [],
+      "assertions": [
+        "Confirms the path ../other-service with the user before calling any Unify tool other than user_whoami",
+        "Shows the resolved absolute path and waits for the user's answer instead of only announcing the path",
+        "Runs git -C ../other-service remote get-url origin",
+        "Does not use the current directory's remote URL"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Onboard this repo to Unify.",
+      "expected_output": "The remote exists but has no commits. Detects the empty remote, warns that Unify reads the remote so nothing will appear in Runs until code is pushed, and continues the onboarding.",
+      "files": [],
+      "assertions": [
+        "Runs git ls-remote --heads origin (or an equivalent check of the remote, not the local checkout)",
+        "Warns that the remote has no commits and nothing will appear in Runs until code is pushed",
+        "Does not stop the onboarding because the remote is empty"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Onboard this repo to Unify.",
+      "expected_output": "git ls-remote fails because the remote doesn't exist or local git can't see it. Says the remote can't be reached with local git, notes that Unify's integration may still have access, and asks whether to continue instead of treating the remote as empty.",
+      "files": [],
+      "assertions": [
+        "Runs git ls-remote --heads origin and detects that it failed",
+        "Says the remote may not exist or the user's git credentials can't see it",
+        "Does not give the empty-remote warning",
+        "Asks whether to continue before calling services_add"
       ]
     }
   ]

@@ -14,20 +14,35 @@ allowed-tools:
 
 # Onboard Repo to CloudBees Unify
 
-## Prerequisites
-
-Before starting, confirm the user has:
-- Admin access to their SCM provider (GitHub, GitLab, Bitbucket, or Gerrit)
-- Ability to create API tokens or credentials in that provider
-
-If either is missing, stop and advise them to get the necessary permissions first.
-
 ## Workflow
 
 1. **Verify Unify connection** — call `user_whoami`. If it errors, tell the user to
    check `/mcp` and run `/reload-plugins`.
 
-2. **Get org ID** — ask which organization or sub-organization the component belongs
+2. **Get repo details** — "this repo" means the current working directory. If the
+   user points to another path, resolve it to an absolute path, ask them to confirm it,
+   and wait for their answer before calling any other Unify tool. Then run each git
+   command as `git -C <path> ...`. Run `git remote get-url origin` for the URL and
+   `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
+   branch (fall back to `main`). Then run `git ls-remote --heads origin`:
+   - It fails: local git can't reach the remote. It may not exist, or the user's git
+     credentials can't see it (Unify's SCM integration may still have access). Say so
+     and ask whether to continue.
+   - It succeeds but prints nothing: the remote has no commits. Warn the user that
+     Unify reads the remote, not the local checkout, so nothing will appear in
+     **Runs** until they push.
+
+3. **Check for existing components** — before asking about an org, resolve
+   `selected_organization` from `user_whoami` as in step 4 and take the top-level
+   organization it sits under (itself, if it has no parent). If there's no
+   `selected_organization`, ask which top-level org to search. Call `services_list`
+   with that org ID and `typeFilter: COMPONENT_FILTER`; its results include
+   sub-organization components. Compare each `repositoryUrl` to the repo URL (ignore
+   a trailing `.git`; treat `git@host:owner/repo` and `https://host/owner/repo` as
+   the same), and say which org you searched. If this repo URL is already registered,
+   show the existing component and ask how to proceed instead of asking for an org.
+
+4. **Get org ID** — ask which organization or sub-organization the component belongs
    in, suggesting `selected_organization` from `user_whoami`. Resolve the name with
    `organizations_list` and `name` (a plain, case-insensitive fragment; no wildcards):
    - One match: use its `id`.
@@ -38,39 +53,32 @@ If either is missing, stop and advise them to get the necessary permissions firs
      `childOrganizations` at every depth. If it's still not found, say so and ask the
      user for the org ID. Don't guess.
 
-   Note the top-level organization the selected org sits under (itself, if it has no
-   parent); step 5 needs it.
-
-3. **Find SCM endpoint** — call `endpoint_list` with `resourceId` set to the org ID,
+5. **Find SCM endpoint** — call `endpoint_list` with `resourceId` set to the org ID,
    `contributionTypes: "cb.platform.endpoint-type"`, and `parents: true` (a
    sub-organization usually inherits its parent's integrations). Follow `nextCursor`
    until it's absent. This type also returns non-SCM integrations such as container
    registries, Jira, and CloudBees CI; keep only endpoints whose `contributionId` names
    the repo's SCM provider (for example `cb.github.github-app-endpoint-type`).
    - If a matching endpoint exists: confirm the name and proceed.
-   - If none exist: instruct the user to go to Unify → org Settings → Integrations
-     → "Create integration", select their SCM provider, fill in the form, and save.
-     Ask them to confirm when done, then retry.
-
-4. **Get repo details** — run `git remote get-url origin` for the URL and
-   `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
-   branch (fall back to `main`).
-
-5. **Check for existing components** — call `services_list` with `organizationId` and
-   `typeFilter: COMPONENT_FILTER`, and compare each `repositoryUrl` to the repo URL
-   (ignore a trailing `.git`; treat `git@host:owner/repo` and `https://host/owner/repo`
-   as the same). Use the top-level org ID: its results include sub-organization
-   components. If this repo URL is already registered, show the existing component and
-   confirm before proceeding.
+   - If none exist: confirm the user has admin access to their SCM provider (GitHub,
+     GitLab, Bitbucket, or Gerrit) and can create API tokens or credentials there. If
+     not, stop and advise them to get those permissions first. Otherwise, instruct them
+     to go to Unify → org Settings → Integrations → "Create integration", select their
+     SCM provider, fill in the form, and save. Ask them to confirm when done, then retry.
 
 6. **Create component(s)** — call `services_add` with `organizationId` (the org
-   selected in step 2, not the top-level one from step 5), `name`,
+   selected in step 4, not the top-level one from step 3), `name`,
    `serviceType: "COMPONENT"`, `endpointId`, `repositoryUrl` (the HTTPS clone URL),
    and `defaultBranch`. The component name defaults to the last segment of the repo
    name. Do not offer to create duplicate components for the same repo URL; if the
    user mentions several services in one repo, explain that one repo URL backs one
    component and ask how they want to proceed. Show the values and wait for the
    user's OK before calling `services_add`.
+
+   Then read the component back with `services_list`, passing `id` from the
+   `services_add` response and the same `organizationId` you passed to `services_add`
+   (with the top-level org ID, it returns "not found"). Report success only if it
+   returns the component; otherwise say the create couldn't be confirmed.
 
 7. **Point the user to scan results** — creating a component doesn't confirm that a
    security scan started, finished, or passed, so don't claim any of that. Ask them to
