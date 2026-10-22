@@ -14,14 +14,6 @@ allowed-tools:
 
 # Onboard Repo to CloudBees Unify
 
-## Prerequisites
-
-Before starting, confirm the user has:
-- Admin access to their SCM provider (GitHub, GitLab, Bitbucket, or Gerrit)
-- Ability to create API tokens or credentials in that provider
-
-If either is missing, stop and advise them to get the necessary permissions first.
-
 ## Workflow
 
 1. **Verify Unify connection** — call `user_whoami`. If it errors, tell the user to
@@ -48,9 +40,11 @@ If either is missing, stop and advise them to get the necessary permissions firs
    registries, Jira, and CloudBees CI; keep only endpoints whose `contributionId` names
    the repo's SCM provider (for example `cb.github.github-app-endpoint-type`).
    - If a matching endpoint exists: confirm the name and proceed.
-   - If none exist: instruct the user to go to Unify → org Settings → Integrations
-     → "Create integration", select their SCM provider, fill in the form, and save.
-     Ask them to confirm when done, then retry.
+   - If none exist: confirm the user has admin access to their SCM provider (GitHub,
+     GitLab, Bitbucket, or Gerrit) and can create API tokens or credentials there. If
+     not, stop and advise them to get those permissions first. Otherwise, instruct them
+     to go to Unify → org Settings → Integrations → "Create integration", select their
+     SCM provider, fill in the form, and save. Ask them to confirm when done, then retry.
 
 4. **Get repo details** — run `git remote get-url origin` for the URL and
    `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default

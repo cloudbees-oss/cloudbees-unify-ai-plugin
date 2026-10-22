@@ -10,6 +10,7 @@
         "Calls user_whoami before proceeding",
         "Calls organizations_list to find the org",
         "Calls endpoint_list to find the GitHub App integration",
+        "Does not ask about SCM admin access or token creation, because a matching endpoint exists",
         "Runs git remote get-url origin to get the repo URL",
         "Asks the user whether to create one component or multiple before creating anything",
         "Explains the one-component-per-URL constraint when multiple services are mentioned",
@@ -25,6 +26,7 @@
       "files": [],
       "assertions": [
         "Calls endpoint_list and detects no GitHub endpoint",
+        "Asks about SCM admin access and token creation only after endpoint_list finds no matching integration",
         "Gives clear instructions to navigate to Unify settings to add the GitHub App",
         "Does not attempt to create a component before the GitHub integration is confirmed"
       ]
