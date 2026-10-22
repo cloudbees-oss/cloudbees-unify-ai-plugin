@@ -73,6 +73,11 @@ allowed-tools:
    component and ask how they want to proceed. Show the values and wait for the
    user's OK before calling `services_add`.
 
+   Then read the component back with `services_list`, passing `id` from the
+   `services_add` response and the same `organizationId` you passed to `services_add`
+   (with the top-level org ID, it returns "not found"). Report success only if it
+   returns the component; otherwise say the create couldn't be confirmed.
+
 7. **Point the user to scan results** — creating a component doesn't confirm that a
    security scan started, finished, or passed, so don't claim any of that. Ask them to
    open the component in Unify and check the **Runs** tab for scan activity and the
