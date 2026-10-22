@@ -23,7 +23,9 @@ allowed-tools:
    user points to another path, confirm the path with them, then run each git command
    as `git -C <path> ...`. Run `git remote get-url origin` for the URL and
    `git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||'` for the default
-   branch (fall back to `main`).
+   branch (fall back to `main`). If `git ls-remote --heads origin` prints nothing, the
+   remote has no commits: warn the user that Unify reads the remote, not the local
+   checkout, so nothing will appear in **Runs** until they push.
 
 3. **Check for existing components** — before asking about an org, resolve
    `selected_organization` from `user_whoami` as in step 4 and take the top-level

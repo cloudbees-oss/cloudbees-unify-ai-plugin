@@ -66,6 +66,17 @@
         "Runs git -C ../other-service remote get-url origin",
         "Does not use the current directory's remote URL"
       ]
+    },
+    {
+      "id": 6,
+      "prompt": "Onboard this repo to Unify.",
+      "expected_output": "The remote exists but has no commits. Detects the empty remote, warns that Unify reads the remote so nothing will appear in Runs until code is pushed, and continues the onboarding.",
+      "files": [],
+      "assertions": [
+        "Runs git ls-remote --heads origin (or an equivalent check of the remote, not the local checkout)",
+        "Warns that the remote has no commits and nothing will appear in Runs until code is pushed",
+        "Does not stop the onboarding because the remote is empty"
+      ]
     }
   ]
 }
