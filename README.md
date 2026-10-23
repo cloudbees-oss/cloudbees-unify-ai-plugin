@@ -233,6 +233,18 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for how to add skills.
 - If you see an OAuth prompt, this is expected on first use.
 - For more, see the [Agent Plugins for VS Code documentation](https://code.visualstudio.com/docs/copilot/customization/agent-plugins).
 
+### Cursor CLI: sign-in fails when the Claude Code plugin is also installed
+
+If `cloudbees-unify` is installed in both Claude Code and Cursor, Cursor CLI may
+pick up the Claude Code copy of the MCP server, and `/mcp` sign-in fails with:
+
+```text
+Policy 'Trusted Hosts' rejected request to client-registration service.
+```
+
+To work around it, disable or uninstall the Claude Code copy of the plugin, start
+a new `cursor-agent` session, and sign in again through `/mcp`.
+
 ## License
 
 MIT — see [LICENSE](./LICENSE).
