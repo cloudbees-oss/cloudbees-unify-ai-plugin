@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Help me onboard this repo to Unify. It's a monorepo with three services: api, worker, and frontend.",
-      "expected_output": "Verifies connection, finds org and GitHub endpoint, detects the monorepo situation, explains the one-component-per-URL constraint, asks how many components to create, then creates the component(s) and summarizes.",
+      "expected_output": "Verifies connection, finds org and GitHub endpoint, detects the monorepo situation, explains that one repo URL backs one component, asks how the user wants to proceed without offering duplicate components, then creates at most one component for the repo URL and summarizes.",
       "files": [],
       "assertions": [
         "Calls user_whoami before proceeding",
@@ -12,9 +12,9 @@
         "Calls endpoint_list to find the GitHub App integration",
         "Does not ask about SCM admin access or token creation, because a matching endpoint exists",
         "Runs git remote get-url origin to get the repo URL",
-        "Asks the user whether to create one component or multiple before creating anything",
+        "Asks how the user wants to proceed before calling services_add, without offering to create multiple components for the same repo URL",
         "Explains the one-component-per-URL constraint when multiple services are mentioned",
-        "Creates at least one component successfully",
+        "Creates no more than one component for the repo URL",
         "Summarizes what was created at the end",
         "Does not claim a security scan started, finished, or passed; points to the Runs and Security Center tabs instead"
       ]
