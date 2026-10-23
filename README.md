@@ -1,5 +1,5 @@
 
-# CloudBees Unify Agent Plugin for Claude Code, Codex, VS Code, Copilot CLI, and Grok CLI
+# CloudBees Unify Agent Plugin for Claude Code, Codex, Cursor, VS Code, Copilot CLI, and Grok CLI
 
 **Ship AI-written code faster and safer with CloudBees, right from your coding agent.**
 
@@ -93,6 +93,26 @@ with the commands above, or add the same marketplace from the app's plugin setti
    }
    ```
 3. Reload VS Code. The plugin will be enabled and its skills, hooks, and MCP servers will be auto-discovered.
+
+### Cursor (desktop and CLI)
+
+Install `cloudbees-unify` from the Cursor marketplace (once published).
+
+Or install locally by cloning into Cursor's local plugins folder. Cursor ignores
+symlinks that point outside this folder, so clone or copy the files rather than
+linking them.
+
+```
+git clone https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin.git \
+  ~/.cursor/plugins/local/cloudbees-unify
+```
+
+In Cursor desktop, run **Developer: Reload Window**. In Cursor CLI, start a new
+`cursor-agent` session. Then sign in to Unify:
+
+1. Send the `/mcp` command.
+2. Select the `unify-mcp-server` server and authenticate.
+3. Complete sign-in in your browser.
 
 ### Grok CLI
 
@@ -219,6 +239,7 @@ A Snyk finding flagged lodash in the auth-service. Pull the finding from Unify,
 
 - `.claude-plugin/`   — Claude plugin.json (also read by Grok CLI) + marketplace.json
 - `.codex-plugin/`    — Codex plugin.json + mcp.json
+- `.cursor-plugin/`   — Cursor plugin.json + mcp.json + hooks.json
 - `.agents/plugins/`  — Codex marketplace.json
 - `.mcp.json`         — Unify MCP server config (auto-wired on install)
 - `skills/`           — skill definitions
