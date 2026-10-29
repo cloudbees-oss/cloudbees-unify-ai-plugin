@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "unify-t1": {
+    "unify-t2": {
       "url": "https://mcp.cloudbees.io/v1/mcp",
       "headers": {
         "X-MCP-Toolsets": "all"
