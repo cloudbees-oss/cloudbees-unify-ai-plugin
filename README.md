@@ -239,7 +239,7 @@ A Snyk finding flagged lodash in the auth-service. Pull the finding from Unify,
 
 - `.claude-plugin/`   — Claude plugin.json (also read by Grok CLI) + marketplace.json
 - `.codex-plugin/`    — Codex plugin.json + mcp.json
-- `.cursor-plugin/`   — Cursor plugin.json + mcp.json + hooks.json
+- `.cursor-plugin/`   — Cursor plugin.json + hooks.json (MCP config is the root `mcp.json`)
 - `.agents/plugins/`  — Codex marketplace.json
 - `.mcp.json`         — Unify MCP server config (auto-wired on install)
 - `skills/`           — skill definitions
