@@ -18,6 +18,5 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.cursor-plugin/mcp.json",
   "hooks": "./.cursor-plugin/hooks.json"
 }
