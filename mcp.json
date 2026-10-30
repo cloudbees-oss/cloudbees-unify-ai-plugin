@@ -7,11 +7,8 @@
         "X-MCP-Toolsets": "all"
       },
       "auth": {
-          "CLIENT_ID": "public-mcp-client",
-          "scopes": ["openid", "profile", "email", "mcp:unify:connect"]
-      },
-      "oauth": {
-        "clientId": "public-mcp-client"
+        "CLIENT_ID": "public-mcp-client",
+        "scopes": ["openid", "profile", "email", "mcp:unify:connect"]
       }
     }
   }

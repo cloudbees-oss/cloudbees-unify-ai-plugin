@@ -1,6 +1,6 @@
 {
-  "name": "cloudbees-unify-t4",
-  "displayName": "CloudBees Unify t4",
+  "name": "cloudbees-unify-t5",
+  "displayName": "CloudBees Unify t5",
   "version": "0.2.0",
   "description": "Ship AI-written code faster and safer with CloudBees, right from your coding agent.",
   "author": {
@@ -18,6 +18,5 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
   "hooks": "./.cursor-plugin/hooks.json"
 }
