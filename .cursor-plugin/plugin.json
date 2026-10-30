@@ -1,6 +1,6 @@
 {
-  "name": "cloudbees-unify-t5",
-  "displayName": "CloudBees Unify t6",
+  "name": "cloudbees-unify",
+  "displayName": "CloudBees Unify",
   "version": "0.2.0",
   "description": "Ship AI-written code faster and safer with CloudBees, right from your coding agent.",
   "author": {
