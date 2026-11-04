@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "unify-mcp-server": {
+      "type": "http",
+      "url": "https://mcp.cloudbees.io/v1/mcp",
+      "headers": {
+        "X-MCP-Toolsets": "all"
+      },
+      "auth": {
+        "CLIENT_ID": "public-mcp-client",
+        "scopes": ["openid", "profile", "email", "mcp:unify:connect"]
+      },
+      "oauth": {
+        "clientId": "public-mcp-client"
+      }
+    }
+  }
+}

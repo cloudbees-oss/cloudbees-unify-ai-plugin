@@ -5,6 +5,9 @@
   "author": {
     "name": "CloudBees"
   },
+  "homepage": "https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin",
+  "repository": "https://github.com/cloudbees-oss/cloudbees-unify-ai-plugin",
+  "license": "MIT",
   "icon": "./assets/logo.png",
   "keywords": [
     "cloudbees",

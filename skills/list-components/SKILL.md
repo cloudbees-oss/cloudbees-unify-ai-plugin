@@ -34,4 +34,10 @@ List components in a CloudBees Unify organization via the Unify MCP server.
 ## Notes
 
 - First call may trigger OAuth in the browser. Tell the user this is expected.
+- On Grok, find these tools with `search_tool` and call them with `use_tool` as `unify-mcp-server__<tool>`, for example `{"tool_name": "unify-mcp-server__services_list", "tool_input": {"organizationId": "<resolved organization UUID>", "typeFilter": "COMPONENT_FILTER"}}`.
+- If a call fails or a tool is missing, say so instead of guessing. Say whether the server isn't connected or the call was denied when the error makes that clear. Recovery:
+  - Claude Code: `/mcp` → `unify-mcp-server` → Authenticate, then `/reload-plugins`.
+  - Codex: `codex mcp login unify-mcp-server`.
+  - Grok: `/mcps` → select `unify-mcp-server` → press `i` to authenticate, then `/plugins` → Plugins tab → `r` to reload.
+- Never fabricate Unify data.
 - Component IDs are the right input for downstream skills (build status, workflow runs). Prefer IDs over names when chaining.

@@ -14,10 +14,21 @@ allowed-tools:
 
 # Onboard Repo to CloudBees Unify
 
+The first Unify call may open a browser OAuth prompt; tell the user this is expected.
+On Grok, find the tools with `search_tool` and call them with `use_tool` as
+`unify-mcp-server__<tool>` (for example `unify-mcp-server__user_whoami`). Never
+fabricate Unify data. If a needed tool is missing or a call fails, say so instead of
+guessing.
+
 ## Workflow
 
-1. **Verify Unify connection** — call `user_whoami`. If it errors, tell the user to
-   check `/mcp` and run `/reload-plugins`.
+1. **Verify Unify connection** — call `user_whoami`. If it errors, say whether the
+   server isn't connected or the call was denied when the error makes that clear, and
+   give the recovery for the user's host:
+   - Claude Code: `/mcp` → `unify-mcp-server` → Authenticate, then `/reload-plugins`.
+   - Codex: `codex mcp login unify-mcp-server`.
+   - Grok: `/mcps` → select `unify-mcp-server` → press `i` to authenticate, then
+     `/plugins` → Plugins tab → `r` to reload.
 
 2. **Get repo details** — "this repo" means the current working directory. If the
    user points to another path, resolve it to an absolute path, ask them to confirm it,

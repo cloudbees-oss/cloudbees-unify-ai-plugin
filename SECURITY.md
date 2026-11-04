@@ -6,4 +6,4 @@ If you discover a security issue in this plugin, please report it privately to t
 
 ## Scope
 
-This plugin is a thin wrapper that routes requests through the CloudBees Unify MCP server (`https://mcp.cloudbees.io/v1/mcp`). Authentication is handled by Unify's OAuth flow — credentials are stored by the MCP client (Claude Code or GitHub Copilot CLI), not by this plugin. The plugin itself does not handle secrets.
+This plugin is a thin wrapper that routes requests through the CloudBees Unify MCP server (`https://mcp.cloudbees.io/v1/mcp`). Authentication is handled by Unify's OAuth flow — credentials are stored by the MCP client (Claude Code, Codex, VS Code, GitHub Copilot CLI, or Grok CLI), not by this plugin. See the README's "Security and permissions" section for details. The plugin itself does not handle secrets.
